@@ -23,5 +23,11 @@ namespace simpleProjectsAPI.Controllers
         {
             return Ok(projectService.GetProjects());
         }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var projects = projectService.GetProjects().Where(p => p.CategoryId == id);
+            return Ok(projects);
+        }
     }
 }
