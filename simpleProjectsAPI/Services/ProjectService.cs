@@ -42,5 +42,12 @@ namespace simpleProjectsAPI.Services
         {
             return projects;
         }
+
+        public Project AddProject(Project project)
+        {
+            projects.Add(project);
+            project.Id = projects[projects.Count - 1].Id + 1;
+            return project;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using simpleProjectsAPI.Models;
 using simpleProjectsAPI.Services;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,18 @@ namespace simpleProjectsAPI.Controllers
         {
             var projects = projectService.GetProjects().Where(p => p.CategoryId == id);
             return Ok(projects);
+        }
+        [HttpPost]
+        public IActionResult Add(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                projectService.AddProject(project);
+                return Created("http://eklendi.com", project);
+            }
+
+            return BadRequest(ModelState);
+
         }
     }
 }
